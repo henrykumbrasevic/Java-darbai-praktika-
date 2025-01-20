@@ -1,5 +1,11 @@
 package lt.techin.oop;
 
-public class Dog {
+public class Dog extends Animal {
 
+    public Dog (){
+        super("brown", 4, true);
+    }
+    public String getDescription(){
+        return super.getDescription();
+    }
 }
