@@ -19,20 +19,18 @@ public class Books implements Comparable<Books> {
     public int getAge() {
         return age;
     }
-    public int getCount(){
-        return count;
-    }
 
     public String toString() {
-        return count + name + " (recommended for " + age + " year-olds or older)";
+        return name + " (recommended for " + age + " year-olds or older)";
     }
 
     @Override
     public int compareTo(Books o) {
-        if (this.name.compareTo(o.name) != 0) {
+        int ageCompare = Integer.compare(this.age, o.age);
+        if (ageCompare == 0) {
             return this.name.compareTo(o.name);
+        } else {
+            return ageCompare;
         }
-        return Integer.compare(o.age, this.age);
     }
-
 }
