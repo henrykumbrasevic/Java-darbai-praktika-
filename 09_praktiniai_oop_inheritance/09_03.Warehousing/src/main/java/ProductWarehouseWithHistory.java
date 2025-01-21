@@ -1,30 +1,32 @@
 public class ProductWarehouseWithHistory extends ProductWarehouse {
 
-    private double initialBalance;
-
-    private ChangeHistory changeHistory;
+    private ChangeHistory changeHistory = new ChangeHistory();
 
     public ProductWarehouseWithHistory(String productName, double capacity, double initialBalance) {
         super(productName, capacity);
-
         addToWarehouse(initialBalance);
-        changeHistory = new ChangeHistory();
 
     }
 
     public String history() {
-        return super.toString();
+        return changeHistory.toString();
     }
 
+    @Override
     public void addToWarehouse(double amount) {
+        changeHistory.add(getBalance() + amount);
         super.addToWarehouse(amount);
-        changeHistory.add(getBalance());
-
 
     }
 
-    public double takeFromTheWarehouse(double amount) {
-        super.takeFromWarehouse(amount);
+    @Override
+    public double takeFromWarehouse(double amount) {
+        changeHistory.add(getBalance() - amount);
+        return super.takeFromWarehouse(amount);
+    }
 
+
+    public void printAnalysis() {
+        System.out.println("Product: " + super.getName() + "\nHistory: " + changeHistory.toString() + " \nLargest amount of product: " + changeHistory.maxValue() + " \nSmallest amount of product: " + changeHistory.minValue() + "\nAverage: " + changeHistory.average());
     }
 }

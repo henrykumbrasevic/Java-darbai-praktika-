@@ -40,7 +40,7 @@ public class ChangeHistory {
         if (history.isEmpty()) {
             return 0;
         } else {
-            for (Double history : history){
+            for (Double history : history) {
                 average += history;
             }
         }
